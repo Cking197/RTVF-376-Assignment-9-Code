@@ -52,6 +52,7 @@ def move_player(direction):
     elif direction == 'right' and col < grid_cols - 1:
         player_pos[1] += 1
     print(f"Player moved to: {player_pos}")
+    swap_windows()
 
 def layout_windows():
     # Lay out windows in grid: top->bottom, left->right
@@ -74,6 +75,20 @@ def layout_windows():
 
 def swap_windows():
     # Implement window swapping logic here
+    win_titles = [win['title'] for win in window_configs]
+    win_objs = {title: gw.getWindowsWithTitle(title)[0] for title in win_titles if gw.getWindowsWithTitle(title)}
+    for row in range(grid_rows):
+        for col in range(grid_cols):
+            title = grid[row][col]
+            if title and title in win_objs:
+
+                try:
+                    if row == player_pos[0] and col == player_pos[1]:
+                        win_objs[title].restore()
+                    else:
+                        win_objs[title].minimize()
+                except Exception as e:
+                    print(f"Could minimize/restore '{title}': {e}")
     print(f"Swapping windows at position: {player_pos}")
 
 keyboard.add_hotkey('w', lambda: move_player('up'))
