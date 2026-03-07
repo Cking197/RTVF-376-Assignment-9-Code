@@ -124,4 +124,4 @@ dmypy.json
 .pyre/
 
 #images folder
-images/
+# images/
