@@ -5,8 +5,8 @@ import subprocess
 # Configurable grid size
 GRID_ROWS = 6
 GRID_COLS = 6
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
+SCREEN_WIDTH = 1920
+SCREEN_HEIGHT = 1080
 CONFIG_PATH = "dungeon_window_config.yaml"
 
 # Load config
