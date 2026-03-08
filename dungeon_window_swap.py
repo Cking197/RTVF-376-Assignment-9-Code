@@ -2,6 +2,8 @@ import pygetwindow as gw
 import keyboard
 import yaml
 import os
+import time
+import random
 
 
 #This script is outdated and needs to be adjusted to match new scripts.
@@ -52,7 +54,6 @@ def move_player(direction):
     elif direction == 'right' and col < grid_cols - 1:
         player_pos[1] += 1
     print(f"Player moved to: {player_pos}")
-    swap_windows()
 
 def layout_windows():
     # Lay out windows in grid: top->bottom, left->right
@@ -91,14 +92,33 @@ def swap_windows():
                     print(f"Could minimize/restore '{title}': {e}")
     print(f"Swapping windows at position: {player_pos}")
 
+def screenshake(amt):
+    # screenshakes current window
+    title = grid[player_pos[0]][player_pos[1]]
+    win = gw.getWindowsWithTitle(title)[0]
+
+    x_ref, y_ref = win.left, win.top
+    start = time.time()
+
+    while time.time() - start < 0.5:
+        dx = random.randint(-amt, amt)
+        dy = random.randint(-amt, amt)
+        win.moveTo(x_ref + dx, y_ref + dy)
+        time.sleep(0.01)
+
+    # restore original position
+    win.moveTo(x_ref, y_ref)
+    
+
 keyboard.add_hotkey('w', lambda: move_player('up'))
 keyboard.add_hotkey('s', lambda: move_player('down'))
 keyboard.add_hotkey('a', lambda: move_player('left'))
 keyboard.add_hotkey('d', lambda: move_player('right'))
 keyboard.add_hotkey('space', swap_windows)
 keyboard.add_hotkey('ctrl+l', layout_windows)
+keyboard.add_hotkey('k', lambda: screenshake(2))
 
-print("Controls: W/A/S/D to move, SPACE to swap windows, CTRL+L to lay out grid. Press ESC to quit.")
+print("Controls: W/A/S/D to move, SPACE to swap windows, K to screenshake, CTRL+L to lay out grid. Press ESC to quit.")
 print("Available windows:")
 for title in list_windows():
     print(f"- {title}")
