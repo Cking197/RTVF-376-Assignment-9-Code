@@ -44,6 +44,19 @@ cell_height = SCREEN_HEIGHT // GRID_ROWS
 
 tile_processes = []
 
+# coords that are not black screens
+map_tiles = [
+    (1,0), (2,0),
+    (2,1), (4,1), (5,1),
+    (0,2), (1,2), (2,2), (3,2), (4,2),
+    (1,3), (2,3), (3,3),
+    (2,4),
+    (1,5), (2,5), (3,5)
+]
+# bool for map toggle
+#global map_toggled
+map_toggled = True
+
 
 def open_image_windows():
     """Launch all tile image windows in their grid positions."""
@@ -130,6 +143,8 @@ def layout_windows():
                 try:
                     win_objs[title].moveTo(x, y)
                     win_objs[title].resizeTo(cell_width, cell_height)
+                    if (col, row) not in map_tiles:
+                        win_objs[title].minimize()
                 except Exception as e:
                     print(f"Could not move/resize window '{title}': {e}")
     # Place game window on top at current position
@@ -152,12 +167,47 @@ def screenshake(amt):
     win.moveTo(x_ref, y_ref)
 
 
+
+def toggle_map():
+    """Toggles the map to show."""
+    ## windows to toggle
+    #[1,0] [2,0]
+    #[2,1] [4,1] [5,1]
+    #[0~4,2]
+    #[1~3,3]
+    #[2,4]
+    #[1~3,5]
+    win = get_game_window()
+    if not win:
+        return
+    win.minimize()
+    win_titles = [win['title'] for win in window_configs]
+    win_objs = {title: gw.getWindowsWithTitle(title)[0] for title in win_titles if gw.getWindowsWithTitle(title)}
+    global map_toggled
+    
+    for col, row in map_tiles:
+        t = grid[row][col]
+        if t and t in win_objs:
+            try:
+                if map_toggled:
+                    win_objs[t].minimize()
+                else:
+                    win_objs[t].restore()
+            except Exception as e:
+                print(f"Could not minimize/restore window '{t}': {e}")
+    win.restore()
+    map_toggled = not map_toggled
+    print("Map toggled")
+
+
+
 keyboard.add_hotkey('w', lambda: move_player('up'))
 keyboard.add_hotkey('s', lambda: move_player('down'))
 keyboard.add_hotkey('a', lambda: move_player('left'))
 keyboard.add_hotkey('d', lambda: move_player('right'))
 keyboard.add_hotkey('ctrl+l', layout_windows)
-keyboard.add_hotkey('k', lambda: screenshake(2))
+keyboard.add_hotkey('k', lambda: screenshake(3))
+keyboard.add_hotkey('m', toggle_map)
 keyboard.add_hotkey('0', close_all_and_exit)
 
 print(f"Resolution: {SCREEN_WIDTH}x{SCREEN_HEIGHT}, Cell: {cell_width}x{cell_height}")
@@ -166,7 +216,7 @@ open_image_windows()
 time.sleep(2)  # Give tile windows time to open
 
 print(f"Game window: '{game_title}' starting at grid position {player_pos}")
-print("Controls: W/A/S/D to move game window, K to screenshake, CTRL+L to lay out grid, 0 to close all & quit. Press ESC to quit.")
+print("Controls: W/A/S/D to move game window, M to toggle map, K to screenshake, CTRL+L to lay out grid, 0 to close all & quit. Press ESC to quit.")
 
 # Place game window at starting position
 move_game_to_pos()

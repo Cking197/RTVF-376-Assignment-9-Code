@@ -5,7 +5,7 @@
 # Add more windows as needed, specifying their grid position
 
 Game:
-  -title: "NES - Legend of Zelda, The (U) (PRG0) [!]"
+  -title: "Legend of Zelda, The [NES] - Bizhawk"
   -position: [5, 2]
 windows:
   - title: "row-1-column-1.png"
