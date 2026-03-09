@@ -5,29 +5,15 @@
 # Add more windows as needed, specifying their grid position
 
 Game:
-  -title: "Legend of Zelda, The [NES] - Bizhawk"
+  -title:  "NES - Legend of Zelda, The (U) (PRG0) [!]"
   -position: [5, 2]
 windows:
-  - title: "row-1-column-1.png"
-    position: [0, 0]
-  - title: "row-1-column-2.png"
-    position: [0, 1]
   - title: "row-1-column-3.png"
     position: [0, 2]
-  - title: "row-1-column-4.png"
-    position: [0, 3]
-  - title: "row-1-column-5.png"
-    position: [0, 4]
-  - title: "row-1-column-6.png"
-    position: [0, 5]
-  - title: "row-2-column-1.png"
-    position: [1, 0]
-  - title: "row-2-column-2.png"
-    position: [1, 1]
+  - title: "row-1-column-2.png"
+    position: [0, 1]
   - title: "row-2-column-3.png"
     position: [1, 2]
-  - title: "row-2-column-4.png"
-    position: [1, 3]
   - title: "row-2-column-5.png"
     position: [1, 4]
   - title: "row-2-column-6.png"
@@ -42,41 +28,17 @@ windows:
     position: [2, 3]
   - title: "row-3-column-5.png"
     position: [2, 4]
-  - title: "row-3-column-6.png"
-    position: [2, 5]
-  - title: "row-4-column-1.png"
-    position: [3, 0]
   - title: "row-4-column-2.png"
     position: [3, 1]
   - title: "row-4-column-3.png"
     position: [3, 2]
   - title: "row-4-column-4.png"
     position: [3, 3]
-  - title: "row-4-column-5.png"
-    position: [3, 4]
-  - title: "row-4-column-6.png"
-    position: [3, 5]
-  - title: "row-5-column-1.png"
-    position: [4, 0]
-  - title: "row-5-column-2.png"
-    position: [4, 1]
   - title: "row-5-column-3.png"
     position: [4, 2]
-  - title: "row-5-column-4.png"
-    position: [4, 3]
-  - title: "row-5-column-5.png"
-    position: [4, 4]
-  - title: "row-5-column-6.png"
-    position: [4, 5]
-  - title: "row-6-column-1.png"
-    position: [5, 0]
   - title: "row-6-column-2.png"
     position: [5, 1]
   - title: "row-6-column-3.png"
     position: [5, 2]
   - title: "row-6-column-4.png"
     position: [5, 3]
-  - title: "row-6-column-5.png"
-    position: [5, 4]
-  - title: "row-6-column-6.png"
-    position: [5, 5]
